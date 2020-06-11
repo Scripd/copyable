@@ -48,10 +48,21 @@ class LocalCopierGenerator extends GeneratorForAnnotation<GenerateCopier> {
       String newClassName =
           baseClassName + 'Copier'; // TODO: Expose this option
       List<Parameter> fields = visitor.fields;
-      String defaultObjectCode =
-          annotation.read('defaultObjectCode').stringValue ??
+      
+      
+      String defaultObjectCode;
+      
+      /*
+      final defaultObjectCodeReader = annotation.read('defaultObjectCode');
+      if (defaultObjectCodeReader != null) {
+        defaultObjectCode =
+          defaultObjectCodeReader.stringValue ??
               '$baseClassName()';
+      }
+      */
 
+      defaultObjectCode = '$baseClassName()';
+      
       // Generate copier class.
       Class copier = generateCopierClass(
         baseClassName: baseClassName,
